@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
       }
       return state.map(anecdote=>
         anecdote.id!==id ? anecdote: changedAnecdote
-      )
+      ).slice().sort((a,b)=>a.votes-b.votes).reverse()
     default:
       return state
   }
