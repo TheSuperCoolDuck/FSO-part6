@@ -13,13 +13,13 @@ const notificationReducer = (state=initialState, action)=>{
   }
 }
 
-export const ClearNotification = () =>{
+export const clearNotification = () =>{
   return{
     type: 'CLEAR_NOTIFICATION'
   }
 }
 
-export const VoteNotification = (anecdote) => {
+export const voteNotification = (anecdote) => {
   
   return{
     type: 'VOTE_NOTIFICATION',
@@ -27,7 +27,7 @@ export const VoteNotification = (anecdote) => {
   }
 }
 
-export const CreateNotification = (anecdote) => {
+export const createNotification = (anecdote) => {
   return{
     type: 'CREATE_NOTIFICATION',
     message: anecdote
