@@ -19,18 +19,27 @@ export const clearNotification = () =>{
   }
 }
 
-export const voteNotification = (anecdote) => {
-  
-  return{
-    type: 'VOTE_NOTIFICATION',
-    message: anecdote
+export const voteNotification = (anecdote, timeout) => {
+  return async dispatch=>{
+    setTimeout(()=>{
+      dispatch(clearNotification())
+    },timeout)
+    dispatch({
+      type: 'VOTE_NOTIFICATION',
+      message: anecdote
+    })
   }
 }
 
-export const createNotification = (anecdote) => {
-  return{
-    type: 'CREATE_NOTIFICATION',
-    message: anecdote
+export const createNotification = (anecdote, timeout) => {
+  return async dispatch=>{
+    setTimeout(()=>{
+      dispatch(clearNotification())
+    }, timeout)
+    dispatch({
+      type: 'CREATE_NOTIFICATION',
+      message: anecdote
+    })
   }
 }
 
