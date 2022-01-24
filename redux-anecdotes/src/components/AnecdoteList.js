@@ -9,10 +9,10 @@ const AnecdoteList = () =>{
     anecdote.filter(a=>a.content.toUpperCase().includes(filter.toUpperCase()))
   ))
 
-  const vote = (id, anecdote) => {
-    console.log('vote', id)
-    dispatch(voteAnecdote(id))
-    dispatch(voteNotification(anecdote))
+  const vote = (anecdote) => {
+    console.log('vote', anecdote.id)
+    dispatch(voteAnecdote(anecdote))
+    dispatch(voteNotification(anecdote.content))
     setTimeout(()=>dispatch(clearNotification()),5000)
   }
 
@@ -25,7 +25,7 @@ const AnecdoteList = () =>{
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote.id, anecdote.content)}>vote</button>
+            <button onClick={() => vote(anecdote)}>vote</button>
           </div>
         </div>
       )}

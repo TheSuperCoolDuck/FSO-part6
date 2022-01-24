@@ -10,7 +10,7 @@ const reducer = (state = [], action) => {
     case 'INIT_ANECDOTES':
       return action.data
     case 'VOTE_ANECDOTE':
-      const id = action.data.id
+      const id = action.data
       const anecdoteToChange = state.find(a=>a.id===id)
       const changedAnecdote = {
         ...anecdoteToChange,
@@ -24,10 +24,13 @@ const reducer = (state = [], action) => {
   }
 }
 
-export const voteAnecdote = (id) => {
-  return{
-    type: 'VOTE_ANECDOTE',
-    data: {id}
+export const voteAnecdote = (anecdote) => {
+  return async dispatch =>{
+    await anecdoteService.update(anecdote.id,{...anecdote, votes: anecdote.votes+1})
+    dispatch({
+      type: 'VOTE_ANECDOTE',
+      data: anecdote.id,
+    })
   }
 }
 
