@@ -1,6 +1,4 @@
-const initialState=''
-
-const notificationReducer = (state=initialState, action)=>{
+const notificationReducer = (state='', action)=>{
   switch(action.type){
     case 'VOTE_NOTIFICATION':
       return `you voted '${action.message}'`
@@ -19,26 +17,39 @@ export const clearNotification = () =>{
   }
 }
 
-export const voteNotification = (anecdote, timeout) => {
+export const voteNotification = (anecdote, timeout, timeoutId) => {
   return async dispatch=>{
-    setTimeout(()=>{
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(()=>{
       dispatch(clearNotification())
     },timeout)
     dispatch({
       type: 'VOTE_NOTIFICATION',
       message: anecdote
     })
+    dispatch({
+      type: 'SET_TIMEOUTID',
+      timeoutId
+    })
   }
 }
 
-export const createNotification = (anecdote, timeout) => {
+export const createNotification = (anecdote, timeout, timeoutId) => {
   return async dispatch=>{
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(()=>{
+      dispatch(clearNotification())
+    },timeout)
     setTimeout(()=>{
       dispatch(clearNotification())
     }, timeout)
     dispatch({
       type: 'CREATE_NOTIFICATION',
       message: anecdote
+    })
+    dispatch({
+      type: 'SET_TIMEOUTID',
+      timeoutId
     })
   }
 }
